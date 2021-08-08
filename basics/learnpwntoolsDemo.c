@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-#define bufferSize 200
+#define bufferSize 128
 
 void spawnShell(){
 	gid_t gid = getegid();
@@ -17,7 +17,7 @@ void exploitme(){
 	puts("What is your name?\n");
 	fflush(stdout);
 	gets(name);
-	printf("Hello! %s", name);
+	puts(name);
 	fflush(stdout);
 }
 
