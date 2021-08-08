@@ -6,14 +6,14 @@
 
 int bufferSize = 128;
 
-void spawnShell(){
-	setPrivs();
-	system("/bin/sh -i");
-}
-
 void setPrivs(){
 	gid_t gid = getegid();
 	setresgid(gid, gid, gid);
+}
+
+void spawnShell(){
+	setPrivs();
+	system("/bin/sh -i");
 }
 
 void exploitme(){
