@@ -4,30 +4,26 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-int bufferSize = 128;
-
-void setPrivs(){
-	gid_t gid = getegid();
-	setresgid(gid, gid, gid);
-}
+#define bufferSize 200
 
 void spawnShell(){
-	setPrivs();
+	gid_t gid = getegid();
+	setresgid(gid, gid, gid);
 	system("/bin/sh -i");
 }
 
 void exploitme(){
 	char name[bufferSize];
-	puts("What is your name? ");
+	puts("What is your name?\n");
 	fflush(stdout);
 	gets(name);
-	puts(name);
+	printf("Hello! %s", name);
 	fflush(stdout);
 }
 
-int main(int argc, char **argv){
-	puts("WELCOME TO PWNTOOLS DEMO #1\n");
-	setPrivs();
+int main(){
+	gid_t gid = getegid();
+	setresgid(gid, gid, gid);
 	exploitme();
 	return 0;
 }
